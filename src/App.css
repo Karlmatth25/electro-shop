@@ -1,0 +1,177 @@
+.app-container {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/*
+  Thèmes via variables CSS
+  - Les variables sont consommées par tous les composants enfants
+  - --bg: couleur de fond générale
+  - --surface: panneau/surfaces (sidebar, sections)
+  - --text: texte principal
+  - --muted: texte secondaire
+  - --accent / --accent2: couleurs néon
+  - --hover-bg: fond au survol
+*/
+.app-container.dark-theme {
+  --bg: #1a1a1a;
+  --surface: #121212;
+  --text: #ffffff;
+  --muted: #e0e0e0;
+  --accent: #00D1FF;
+  --accent2: #8B00FF;
+  --hover-bg: rgba(255, 255, 255, 0.06);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app-container.light-theme {
+  --bg: #f0f0f0;
+  --surface: #ffffff;
+  --text: #333333;
+  --muted: #555555;
+  --accent: #00D1FF;
+  --accent2: #8B00FF;
+  --hover-bg: rgba(0, 0, 0, 0.06);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.background-neon {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--accent), var(--accent2), #00FFCC);
+  opacity: 0.1;
+  animation: neonPulse 10s infinite;
+  z-index: -1;
+}
+
+@keyframes neonPulse {
+  0% { opacity: 0.1; }
+  50% { opacity: 0.2; }
+  100% { opacity: 0.1; }
+}
+
+.toggle-sidebar {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  color: var(--accent);
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.toggle-sidebar:hover {
+  color: var(--accent2);
+  transform: scale(1.1);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.15);
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
+  font-size: 1.5em;
+  color: var(--accent);
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  /* Effet 3D léger */
+  transform-style: preserve-3d;
+  padding: 8px 10px;
+  border-radius: 10px;
+  /* Glow néon */
+  box-shadow: 0 0 8px var(--accent), 0 0 16px color-mix(in oklab, var(--accent) 70%, transparent), 0 0 24px color-mix(in oklab, var(--accent2) 40%, transparent);
+}
+
+/* Halo animé autour du bouton */
+.theme-toggle::before,
+.theme-toggle::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 12px;
+  background: radial-gradient(60% 60% at 50% 50%, color-mix(in oklab, var(--accent) 35%, transparent) 0%, transparent 70%),
+              radial-gradient(40% 40% at 30% 30%, color-mix(in oklab, var(--accent2) 30%, transparent) 0%, transparent 70%);
+  filter: blur(8px);
+  z-index: -1;
+  animation: neonSweep 2.4s infinite linear;
+}
+
+.theme-toggle::after {
+  inset: -12px;
+  filter: blur(16px);
+  opacity: 0.6;
+}
+
+@keyframes neonSweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.theme-toggle:hover {
+  color: var(--accent2);
+  transform: translateZ(6px) rotate(10deg) scale(1.05);
+  box-shadow: 0 0 10px var(--accent2), 0 0 22px color-mix(in oklab, var(--accent2) 70%, transparent);
+}
+
+.theme-toggle:active {
+  transform: translateZ(2px) scale(0.98);
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background: var(--surface);
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: var(--accent);
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.sidebar-link:hover {
+  background: var(--hover-bg);
+  color: var(--accent2);
+  transform: translateX(5px);
+}
+
+.icon-neon {
+  margin-right: 10px;
+}
+
+.main-content {
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+  padding: 20px;
+  color: var(--text);
+}
+
+.sidebar.active + .main-content {
+  margin-left: 250px;
+}

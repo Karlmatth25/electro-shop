@@ -1,0 +1,103 @@
+.homepage {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+.hero {
+  height: 60vh;
+  /* Utilise les couleurs d'accent du thème */
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 1;
+}
+
+.hero-title {
+  font-size: 3em;
+  text-shadow: 0 0 10px var(--accent);
+  margin-bottom: 10px;
+}
+
+.hero-text {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: var(--muted);
+}
+
+.cta-button {
+  padding: 12px 25px;
+  background: var(--accent);
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background: var(--accent2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px color-mix(in oklab, var(--accent) 50%, transparent);
+}
+
+.featured-products {
+  padding: 40px 20px;
+  background: var(--surface);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2em;
+  color: var(--accent);
+  margin-bottom: 20px;
+  text-shadow: 0 0 5px color-mix(in oklab, var(--accent) 50%, transparent);
+}
+
+.slider-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.slider-track {
+  display: flex;
+  width: 400%;
+}
+
+.slide {
+  flex: 0 0 25%;
+  padding: 10px;
+}
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--hover-bg);
+  border: none;
+  color: var(--accent);
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+@media (max-width: 768px) {
+  .hero-title { font-size: 2em; }
+  .hero-text { font-size: 1.2em; }
+  .slide { flex: 0 0 50%; }
+}

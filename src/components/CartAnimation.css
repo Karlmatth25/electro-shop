@@ -1,0 +1,19 @@
+.cart-animation {
+    animation: slideIn 0.5s forwards, fadeOut 0.5s 1.5s forwards;
+  }
+  
+  @keyframes slideIn {
+    from { 
+      transform: translateX(100px);
+      opacity: 0;
+    }
+    to { 
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
